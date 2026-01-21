@@ -40,8 +40,11 @@ void setup() {
 
   motor.linkDriver(&driver);
 
-  motor.current_limit = 1;
-  motor.controller = MotionControlType::velocity_openloop;
+  //motor.current_limit = 1; // old one
+    motor.current_limit = 2; // set current limit to 2A
+    driver.voltage_limit = 12; // limit voltage to 12V
+    //motor.controller = MotionControlType::velocity_openloop; // this is the old one it is dangerous
+    motor.controller = MotionControlType::angle_openloop; // used angle open loop not velocity open loop
 
   if (!motor.init()) {
     Serialx.println("Motor init failed!");
